@@ -7,21 +7,27 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import {ColorSchemeName, Image, View} from 'react-native';
-import NotFoundScreen from '../screens/NotFoundScreen';
 import { RootStackParamList } from '../types';
-import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 import Colors from "../constants/Colors";
+import NotFoundScreen from '../screens/NotFoundScreen';
+import ChatsScreen from "../screens/ChatsScreen";
+
+
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
     <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <RootNavigator />
+        linking={LinkingConfiguration}
+        theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+    >
+        <RootNavigator/>
     </NavigationContainer>
+
   );
 }
+
+
 
 // A root stack navigator is often used for displaying modals on top of all other content
 // Read more here: https://reactnavigation.org/docs/modal
@@ -38,7 +44,7 @@ function RootNavigator() {
     <Stack.Navigator screenOptions={{
         headerStyle: {
             backgroundColor: Colors.light.headerBackground,
-            height: 120,
+            height: 130,
             borderRadius: 22
         },
         headerTintColor: Colors.light.headerTitle,
@@ -49,17 +55,16 @@ function RootNavigator() {
     }}>
       <Stack.Screen
           name="Root"
-          component={BottomTabNavigator}
+          component={ChatsScreen}
           options={{
               title: "Rooms",
               headerRight: () => {
-                  return <>
+                  return(
                       <View style={{flexDirection: "row"}}>
                           <Image source={require("../assets/icons/search.png")} style={iconStyle}/>
                           <Image source={require("../assets/icons/rooms.png")} style={{...iconStyle, marginRight: 15}}/>
                       </View>
-                  </>
-          }
+                  )}
           }}
       />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
