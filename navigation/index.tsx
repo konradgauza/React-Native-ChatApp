@@ -6,12 +6,12 @@
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-import { ColorSchemeName } from 'react-native';
-
+import {ColorSchemeName, Image, View} from 'react-native';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
+import Colors from "../constants/Colors";
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -27,10 +27,41 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 // Read more here: https://reactnavigation.org/docs/modal
 const Stack = createStackNavigator<RootStackParamList>();
 
+const iconStyle ={
+    height: 40,
+    width: 40,
+    marginRight: 8
+}
+
 function RootNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Root" component={BottomTabNavigator} />
+    <Stack.Navigator screenOptions={{
+        headerStyle: {
+            backgroundColor: Colors.light.headerBackground,
+            height: 120,
+            borderRadius: 22
+        },
+        headerTintColor: Colors.light.headerTitle,
+        headerTitleAlign: "left",
+        headerTitleStyle: {
+            fontSize: 30
+        }
+    }}>
+      <Stack.Screen
+          name="Root"
+          component={BottomTabNavigator}
+          options={{
+              title: "Rooms",
+              headerRight: () => {
+                  return <>
+                      <View style={{flexDirection: "row"}}>
+                          <Image source={require("../assets/icons/search.png")} style={iconStyle}/>
+                          <Image source={require("../assets/icons/rooms.png")} style={{...iconStyle, marginRight: 15}}/>
+                      </View>
+                  </>
+          }
+          }}
+      />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );
