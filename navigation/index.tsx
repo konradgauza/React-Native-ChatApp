@@ -11,7 +11,7 @@ import { RootStackParamList } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import Colors from "../constants/Colors";
 import ChatsScreen from "../screens/ChatsScreen";
-
+import ChatRoomScreen from "../screens/ChatRoomScreen";
 
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
@@ -22,14 +22,9 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
     >
         <RootNavigator/>
     </NavigationContainer>
-
   );
 }
 
-
-
-// A root stack navigator is often used for displaying modals on top of all other content
-// Read more here: https://reactnavigation.org/docs/modal
 const Stack = createStackNavigator<RootStackParamList>();
 
 const iconStyle ={
@@ -66,6 +61,31 @@ function RootNavigator() {
                   )}
           }}
       />
+        <Stack.Screen
+            name="ChatRoom"
+            component={ChatRoomScreen}
+            options={({route}) => {
+                return ({
+                    title: route.params.name,
+                    headerRight: () => {
+                        return (
+                            <View style={{flexDirection: "row"}}>
+                                <Image source={require("../assets/icons/phone.png")} style={iconStyle}/>
+                                <Image source={require("../assets/icons/videocall.png")} style={{...iconStyle, marginRight: 15}}/>
+                            </View>
+                        )
+                    },
+                    // headerLeft: () => {
+                    //     return (
+                    //         <View style={{flexDirection: "row"}}>
+                    //             <Image source={require("../assets/icons/phone.png")} style={iconStyle}/>
+                    //             <Image source={require("../assets/icons/videocall.png")} style={{...iconStyle, marginRight: 15}}/>
+                    //         </View>
+                    //     )
+                    // }
+                });
+            }}
+        />
     </Stack.Navigator>
   );
 }
