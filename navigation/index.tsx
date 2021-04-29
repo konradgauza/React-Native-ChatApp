@@ -10,7 +10,6 @@ import {ColorSchemeName, Image, View} from 'react-native';
 import { RootStackParamList } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import Colors from "../constants/Colors";
-import NotFoundScreen from '../screens/NotFoundScreen';
 import ChatsScreen from "../screens/ChatsScreen";
 
 
@@ -34,8 +33,8 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 const Stack = createStackNavigator<RootStackParamList>();
 
 const iconStyle ={
-    height: 40,
-    width: 40,
+    height: 50,
+    width: 50,
     marginRight: 8
 }
 
@@ -43,7 +42,7 @@ function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{
         headerStyle: {
-            backgroundColor: Colors.light.headerBackground,
+            backgroundColor: Colors.light.fieldsBackground,
             height: 130,
             borderRadius: 22
         },
@@ -67,7 +66,6 @@ function RootNavigator() {
                   )}
           }}
       />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );
 }

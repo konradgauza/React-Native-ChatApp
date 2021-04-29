@@ -3,11 +3,11 @@ const tintColorDark = '#fff';
 
 export default {
   light: {
-    headerBackground: tintColorLight,
+    fieldsBackground: tintColorLight,
     headerTitle: "#rgb(75,0,130)",
     text: '#000',
     tint: '',
-    background: '#fff',
+    background: 'rgb(240, 248, 255)',
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorLight,
   },
