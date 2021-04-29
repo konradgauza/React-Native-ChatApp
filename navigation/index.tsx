@@ -38,14 +38,14 @@ function RootNavigator() {
     <Stack.Navigator screenOptions={{
         headerStyle: {
             backgroundColor: Colors.light.fieldsBackground,
-            height: 130,
+            height: 125,
             borderRadius: 22
         },
         headerTintColor: Colors.light.headerTitle,
         headerTitleAlign: "left",
         headerTitleStyle: {
             fontSize: 30
-        }
+        },
     }}>
       <Stack.Screen
           name="Root"
@@ -75,6 +75,7 @@ function RootNavigator() {
                             </View>
                         )
                     },
+                    gestureEnabled: true
                     // headerLeft: () => {
                     //     return (
                     //         <View style={{flexDirection: "row"}}>

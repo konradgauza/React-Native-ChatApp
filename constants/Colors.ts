@@ -1,13 +1,13 @@
-const tintColorLight = 'rgb(155,206,250)';
+const tintColorLight = '#B6DEFD';
 const tintColorDark = '#fff';
 
 export default {
   light: {
     fieldsBackground: tintColorLight,
-    headerTitle: "#rgb(75,0,130)",
+    headerTitle: "#5603AD",
     text: '#000',
     tint: '',
-    background: 'rgb(240, 248, 255)',
+    background: '#F0F8FF',
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorLight,
   },

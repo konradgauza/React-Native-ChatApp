@@ -20,6 +20,7 @@ export default function ChatsScreen() {
 const style = StyleSheet.create({
     roomsContainer: {
         alignItems: 'center',
-        width: "100%"
+        width: "100%",
+        marginTop: 30
     }
 });
