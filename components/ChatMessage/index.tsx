@@ -11,7 +11,7 @@ const ChatMessage = (props: ChatMessageProps) => {
     const {message} = props;
 
     const myMessage = () : boolean => {
-        if(message.user.id === "u1") {
+        if(message.user.id === "8cb3dde4-be4c-4abd-bb4e-91a45b8097de") {
             return true
         }else {
             return false
@@ -20,7 +20,7 @@ const ChatMessage = (props: ChatMessageProps) => {
 
     return (
         <View style={myMessage() ? styles.myMessage : styles.message}>
-            <Text style={myMessage() ? styles.myText : styles.text}>{message.user.firstName}</Text>
+            {/*<Text style={myMessage() ? styles.myText : styles.name}>{message.user.firstName}</Text>*/}
             <Text style={myMessage() ? styles.myText : styles.text}>{message.body}</Text>
         </View>
     )

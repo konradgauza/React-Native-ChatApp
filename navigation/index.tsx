@@ -12,41 +12,8 @@ import LinkingConfiguration from './LinkingConfiguration';
 import Colors from "../constants/Colors";
 import ChatsScreen from "../screens/ChatsScreen";
 import ChatRoomScreen from "../screens/ChatRoomScreen";
-//
-// import { ApolloProvider} from "react-apollo";
-// import { ApolloClient} from "apollo-client";
-// import { HttpLink } from "apollo-link-http";
-// import { InMemoryCache } from "apollo-cache-inmemory";
-import {graphql} from 'react-apollo';
-import gql from 'graphql-tag';
-import {useEffect} from "react";
-import {split, useSubscription} from '@apollo/client';
-import { getMainDefinition } from '@apollo/client/utilities';
-import { WebSocketLink } from '@apollo/client/link/ws';
 import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink } from '@apollo/client';
-import {onError} from "@apollo/client/link/error";
-import GetRooms from "../screens/GetRooms";
 import {setContext} from "@apollo/client/link/context";
-
-
-const rooms  = gql`
-    query {
-        usersRooms {
-            rooms {
-              id
-              name
-              roomPic
-            }
-            user {
-              email
-              firstName
-              id
-              lastName
-              profilePic
-              role
-            }
-        }
-    }`
 
 
 const httpLink = new HttpLink({
@@ -154,7 +121,7 @@ function RootNavigator() {
                 component={ChatRoomScreen}
                 options={({route}) => {
                     return ({
-                        title: '',
+                        title: ' ',
                         headerRight: () => {
                             return (
                                 <View style={{flexDirection: "row"}}>
@@ -179,9 +146,5 @@ function RootNavigator() {
             />
         </Stack.Navigator>
       </ApolloProvider>
-
-      // <ApolloProvider client={client}>
-      //     <GetRooms/>
-      // </ApolloProvider>
   );
 }

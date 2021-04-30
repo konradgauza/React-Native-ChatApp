@@ -24,6 +24,10 @@ export const styles = StyleSheet.create({
         alignSelf: "flex-end",
         borderBottomRightRadius: 0,
     },
+    name: {
+        fontWeight: "bold",
+        marginBottom: 5
+    },
     text: {
         color: "black"
     },

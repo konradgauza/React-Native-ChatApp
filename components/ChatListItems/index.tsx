@@ -20,9 +20,6 @@ const ChatListItems = (props: ChatListItemProps) => {
     const onClick = () => {
         navigation.navigate('ChatRoom', {id: rooms.id, name: rooms.name, roomPic: rooms.roomPic});
     }
-    useEffect(() => {
-        console.log(id)
-    }, [])
 
     return (
         <TouchableWithoutFeedback onPress={onClick}>

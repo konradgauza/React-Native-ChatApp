@@ -2,7 +2,6 @@ import * as React from 'react';
 import { StyleSheet,  FlatList } from 'react-native';
 import { Text, View } from '../components/Themed';
 import ChatListItems from "../components/ChatListItems";
-import ChatRooms from "../data/ChatRooms";
 import {useQuery} from "@apollo/client";
 import {LOAD_ROOMS} from "../GraphQL/Queries";
 import {useEffect, useState} from "react";
@@ -10,14 +9,13 @@ import {useEffect, useState} from "react";
 export default function ChatsScreen() {
     const {error, loading, data} = useQuery(LOAD_ROOMS);
     const [rooms, setRooms] = useState();
+    const [lastMessage, setLastMessage] = useState({})
 
     useEffect(() => {
         if (data) {
             setRooms(data.usersRooms.rooms);
         }
-    }, data);
-
-    console.log(rooms);
+    }, [data]);
 
     return (
         <View style={style.roomsContainer}>
@@ -28,16 +26,6 @@ export default function ChatsScreen() {
             />
         </View>
     );
-
-    // return (
-    //     <View style={style.roomsContainer}>
-    //         <FlatList
-    //         data={ChatRooms}
-    //         renderItem={({item, index}) => <ChatListItems chatRoom={item} userIndex={index}/>}
-    //         keyExtractor={(item) => item.id}
-    //         />
-    //     </View>
-    // );
 }
 
 

@@ -19,10 +19,10 @@ export const LOAD_ROOMS = gql`
       }
     }
 `
-export const getMessages = (id : string) => {
-    const messages = gql`
-    query {
-      room (id: ${id}) {
+
+export const GET_MESSAGES = gql`
+    query GetMessage($id: String!){
+      room (id: $id) {
         id
         name
         messages {
@@ -50,5 +50,3 @@ export const getMessages = (id : string) => {
       }
     }
 `
-    return messages;
-}

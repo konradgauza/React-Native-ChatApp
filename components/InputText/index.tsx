@@ -1,15 +1,22 @@
 import React, {useState} from "react";
 import {View, Image, TextInput, TouchableOpacity} from "react-native";
 import {styles} from "./styles";
+import {useMutation} from "@apollo/client";
+import {ADD_MESSAGE} from "../../GraphQL/Mutations";
 
-const InputText = () => {
 
-    const [message, setMessage] = useState('');
+export type TextInputProps = {
+    id: string
+}
+
+const InputText = (props: TextInputProps) => {
+    const [addTodo, { data }] = useMutation(ADD_MESSAGE);
+    const { id } = props;
+    const roomId = id;
+    const [body, setBody] = useState('');
     const onPress = () => {
-        if(message.length !== 0){
-            console.warn("Sent")
-            //send a message to the backend
-        }
+            addTodo({ variables: {body: body, roomId: roomId}});
+            setBody('')
     }
 
     return (
@@ -17,8 +24,8 @@ const InputText = () => {
             <TextInput
                 style={styles.input}
                 multiline={true}
-                value={message}
-                onChangeText={setMessage}
+                value={body}
+                onChangeText={setBody}
             />
             <TouchableOpacity onPress={onPress} style={{alignSelf: "flex-end"}}>
                 <Image source={require("../../assets/icons/send.png")} style={styles.icon}/>
