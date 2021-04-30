@@ -7,11 +7,21 @@ export const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
         backgroundColor: "white",
-        borderRadius: 13,
+        borderRadius: 10,
         padding: 10,
-        width: width,
+        width: width - 13,
         justifyContent: "space-between",
         marginBottom: 12
+    },
+    firstContainer: {
+        flexDirection: "row",
+        backgroundColor: "#5603AD",
+        borderRadius: 13,
+        padding: 10,
+        width: width - 10,
+        justifyContent: "space-between",
+        marginBottom: 12,
+        marginTop: 30
     },
     leftContainer: {
         flexDirection: "row",
@@ -27,6 +37,12 @@ export const styles = StyleSheet.create({
         borderRadius: 50
     },
     userName: {
+        marginBottom: 5,
+        fontWeight: "bold",
+        fontSize: 14
+    },
+    firstUserName: {
+        color: "white",
         marginBottom: 5,
         fontWeight: "bold",
         fontSize: 14

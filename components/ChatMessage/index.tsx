@@ -20,7 +20,8 @@ const ChatMessage = (props: ChatMessageProps) => {
 
     return (
         <View style={myMessage() ? styles.myMessage : styles.message}>
-            <Text style={myMessage() ? styles.myText : styles.text}>{message.content}</Text>
+            <Text style={myMessage() ? styles.myText : styles.text}>{message.user.firstName}</Text>
+            <Text style={myMessage() ? styles.myText : styles.text}>{message.body}</Text>
         </View>
     )
 }
