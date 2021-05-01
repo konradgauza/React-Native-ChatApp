@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text } from 'react-native';
-import { Message} from "../../types";
+import { Message } from "../../types";
 import { styles } from './style'
 
 export type ChatMessageProps = {
@@ -20,7 +20,6 @@ const ChatMessage = (props: ChatMessageProps) => {
 
     return (
         <View style={myMessage() ? styles.myMessage : styles.message}>
-            {/*<Text style={myMessage() ? styles.myText : styles.name}>{message.user.firstName}</Text>*/}
             <Text style={myMessage() ? styles.myText : styles.text}>{message.body}</Text>
         </View>
     )

@@ -1,89 +1,18 @@
-/**
- * If you are not familiar with React Navigation, check out the "Fundamentals" guide:
- * https://reactnavigation.org/docs/getting-started
- *
- */
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-import {ColorSchemeName, Image, Text, View} from 'react-native';
+import {Image, Text, View} from 'react-native';
 import { RootStackParamList } from '../types';
-import LinkingConfiguration from './LinkingConfiguration';
 import Colors from "../constants/Colors";
 import ChatsScreen from "../screens/ChatsScreen";
 import ChatRoomScreen from "../screens/ChatRoomScreen";
-import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink } from '@apollo/client';
-import {setContext} from "@apollo/client/link/context";
-
-
-const httpLink = new HttpLink({
-    uri: "https://chat.thewidlarzgroup.com/api/graphql"
-});
-
-const authLink = setContext((_, { headers }) => {
-    const token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjaGF0bHkiLCJleHAiOjE2MjE1MDY1NTYsImlhdCI6MTYxOTA4NzM1NiwiaXNzIjoiY2hhdGx5IiwianRpIjoiZTVkYTk1YjUtYzRkOC00NmMyLWI2NGEtOGYxNjMzN2UzNmJlIiwibmJmIjoxNjE5MDg3MzU1LCJzdWIiOiI4Y2IzZGRlNC1iZTRjLTRhYmQtYmI0ZS05MWE0NWI4MDk3ZGUiLCJ0eXAiOiJhY2Nlc3MifQ.YXmANaLyeh7kBM2QpA1bSIj9rpQXb86mp-g03sv7My24DvsPs4SO3E2J4spYWsU0i8McPUw9G7S0laGSAVSxjg";
-
-    return {
-        headers: {
-            ...headers,
-            authorization: `Bearer ${token}`
-        }
-    }
-});
-
-const client = new ApolloClient({
-    cache: new InMemoryCache(),
-    link: authLink.concat(httpLink)
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
-  return (
-    <NavigationContainer
-        linking={LinkingConfiguration}
-        theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
-    >
-        <RootNavigator/>
-    </NavigationContainer>
-  );
-}
+import { ApolloProvider } from '@apollo/client';
+import {client} from "../GraphQL/Auth";
+import {styles} from "./style";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
-const iconStyle ={
-    height: 40,
-    width: 40,
-    marginRight: 8,
-    borderRadius: 50
-}
 
-const avatar = {
-    height: 40,
-    width: 40,
-    marginLeft: 15,
-    marginRight: 15,
-    borderRadius: 50
-}
-
-const name = {
-    maxWidth: "80%",
-}
-
-
-function RootNavigator() {
-
-
+export function RootNavigator() {
   return (
       <ApolloProvider client={client}>
         <Stack.Navigator screenOptions={{
@@ -110,8 +39,8 @@ function RootNavigator() {
                   headerRight: () => {
                       return(
                           <View style={{flexDirection: "row"}}>
-                              <Image source={require("../assets/icons/search.png")} style={iconStyle}/>
-                              <Image source={require("../assets/icons/rooms.png")} style={{...iconStyle, marginRight: 15}}/>
+                              <Image source={require("../assets/icons/search.png")} style={styles.iconStyle}/>
+                              <Image source={require("../assets/icons/rooms.png")} style={{...styles.iconStyle, marginRight: 15}}/>
                           </View>
                       )}
               }}
@@ -125,8 +54,8 @@ function RootNavigator() {
                         headerRight: () => {
                             return (
                                 <View style={{flexDirection: "row"}}>
-                                    <Image source={require("../assets/icons/phone.png")} style={iconStyle}/>
-                                    <Image source={require("../assets/icons/videocall.png")} style={{...iconStyle, marginRight: 15}}/>
+                                    <Image source={require("../assets/icons/phone.png")} style={styles.iconStyle}/>
+                                    <Image source={require("../assets/icons/videocall.png")} style={{...styles.iconStyle, marginRight: 15}}/>
                                 </View>
                             )
                         },
@@ -134,9 +63,9 @@ function RootNavigator() {
                         headerLeft: () => {
                             return (
                                 <View style={{flexDirection: "row"}}>
-                                    <Image source={{uri: route.params.roomPic}} style={avatar}/>
+                                    <Image source={{uri: route.params.roomPic}} style={styles.avatar}/>
                                     <View>
-                                        <Text style={name}>{route.params.name}</Text>
+                                        <Text style={styles.name}>{route.params.name}</Text>
                                     </View>
                                 </View>
                             )

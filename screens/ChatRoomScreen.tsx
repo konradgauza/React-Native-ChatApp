@@ -6,21 +6,17 @@ import InputText from "../components/InputText/index";
 import { Route } from "../types";
 import { GET_MESSAGES } from "../GraphQL/Queries";
 import { useQuery } from "@apollo/client";
+import {styles} from "./style";
 
 export type ChatRoomProps = {
     route: Route
 }
 
-const style = {
-    backgroundColor: "#F0F8FF",
-    flexDirection: "column-reverse"
-}
-
 const ChatRoomScreen = (props : ChatRoomProps) => {
-    const [id, setId] = useState(`${props.route.params.id}`);
+    const id = `${props.route.params.id}`;
     const [messages, setMessages] = useState([])
     const route = useRoute();
-    const {loading, error, data, variables} = useQuery(GET_MESSAGES, {
+    const { data } = useQuery(GET_MESSAGES, {
         variables: {id},
     });
 
@@ -31,11 +27,11 @@ const ChatRoomScreen = (props : ChatRoomProps) => {
     }, [data])
 
     return (
-        <View style={{width: "100%", height: "100%"}}>
+        <View style={styles.container}>
             <FlatList
                 data={messages}
                 renderItem={({item}) => <ChatMessage message={item}/>}
-                style={style}
+                style={styles.list}
                 inverted={false}
             />
             <InputText id={id}/>

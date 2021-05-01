@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { StyleSheet,  FlatList } from 'react-native';
-import { Text, View } from '../components/Themed';
+import { FlatList } from 'react-native';
+import { View } from '../components/Themed';
 import ChatListItems from "../components/ChatListItems";
 import {useQuery} from "@apollo/client";
 import {LOAD_ROOMS} from "../GraphQL/Queries";
 import {useEffect, useState} from "react";
+import {styles} from "./style";
 
 export default function ChatsScreen() {
-    const {error, loading, data} = useQuery(LOAD_ROOMS);
+    const {data} = useQuery(LOAD_ROOMS);
     const [rooms, setRooms] = useState();
-    const [lastMessage, setLastMessage] = useState({})
 
     useEffect(() => {
         if (data) {
@@ -18,7 +18,7 @@ export default function ChatsScreen() {
     }, [data]);
 
     return (
-        <View style={style.roomsContainer}>
+        <View style={styles.roomsContainer}>
             <FlatList
                 data={rooms}
                 renderItem={({item, index}) => <ChatListItems rooms={item} userIndex={index} id={item.id}/>}
@@ -27,12 +27,3 @@ export default function ChatsScreen() {
         </View>
     );
 }
-
-
-const style = StyleSheet.create({
-    roomsContainer: {
-        alignItems: 'center',
-        width: "100%",
-        padding: 3
-    }
-});

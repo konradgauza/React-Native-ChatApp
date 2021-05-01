@@ -14,10 +14,12 @@ const InputText = (props: TextInputProps) => {
     const { id } = props;
     const roomId = id;
     const [body, setBody] = useState('');
+
     const onPress = () => {
             addTodo({ variables: {body: body, roomId: roomId}});
             setBody('')
     }
+
 
     return (
         <View style={styles.container}>
